@@ -13,8 +13,7 @@ module Que
       end
 
       def deserialize_json(json)
-        # Allowing `create_additions` would be a security vulnerability.
-        JSON.parse(json, symbolize_names: true, create_additions: false)
+        JSON.parse(json, symbolize_names: true)
       end
     end
   end

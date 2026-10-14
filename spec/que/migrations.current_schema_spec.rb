@@ -19,7 +19,7 @@ describe Que::Migrations, "current schema" do
       ].each do |args|
         assert_constraint_error 'valid_args' do
           DB[:que_jobs].
-            insert(job_class: 'Que::Job', job_schema_version: Que.job_schema_version, args: JSON.generate(args, quirks_mode: true))
+            insert(job_class: 'Que::Job', job_schema_version: Que.job_schema_version, args: JSON.generate(args))
         end
       end
     end
@@ -186,12 +186,12 @@ describe Que::Migrations, "current schema" do
       end
 
       assert_constraint_error 'valid_value' do
-        value_attrs[:value] = JSON.generate(5, quirks_mode: true)
+        value_attrs[:value] = JSON.generate(5)
         DB[:que_values].insert(value_attrs)
       end
 
       assert_constraint_error 'valid_value' do
-        value_attrs[:value] = JSON.generate("string", quirks_mode: true)
+        value_attrs[:value] = JSON.generate("string")
         DB[:que_values].insert(value_attrs)
       end
     end
